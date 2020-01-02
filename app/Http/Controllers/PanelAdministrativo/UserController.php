@@ -116,10 +116,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->file('input-avatar'))
-        {
-            return 'ok';
-        }
+       
         /*$user = User::find($id);
         $user->update([
             'password' =>  bcrypt($request->password), 

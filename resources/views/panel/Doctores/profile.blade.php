@@ -101,7 +101,7 @@
                             <div class="col-md-12">
                                 <label for="password">Contraseña</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-sm" name="password" id="password" aria-describedby="inputGroupNPassword" required>
+                                    <input type="text" class="form-control form-control-sm" name="password" id="password" aria-describedby="inputGroupNPassword" >
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             <div class="col-md-12">
                                 <label for="passwordconfirm">Confirmación de contraseña</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-sm" name="passwordconfirm" id="passwordConfirm" aria-describedby="inputGroupNPasswordConfirm" required>
+                                    <input type="text" class="form-control form-control-sm" name="passwordconfirm" id="passwordConfirm" aria-describedby="inputGroupNPasswordConfirm">
                                 </div>
                             </div>
                         </div>
@@ -201,7 +201,20 @@
                 <div class="card-body">
                     <form action="{{route('doctores.update', $doctor->id)}}" method="POST">
                         @csrf
-                        <textarea name="estudios" id="" class="form-control form-control-sm" cols="30" rows="10">{!!$informacion->estudios!!}</textarea>
+                        <label for="estudios">Estudios</label>
+                        <textarea name="estudios" id="estudios" class="textarea form-control form-control-sm" cols="30" rows="10">{!!$informacion->estudios!!}</textarea>
+                        <label for="experiencia">Experiencia</label>
+                        <textarea name="experiencia" id="experiencia" class="textarea form-control form-control-sm" cols="30" rows="10">{!!$informacion->experiencia!!}</textarea>
+                        <label for="servicios">Servicios</label>
+                        <textarea name="servicios" id="servicios" class="textarea form-control form-control-sm" cols="30" rows="10">{!!$informacion->servicios!!}</textarea>
+                        <label for="membrecias">Membrecías</label>
+                        <textarea name="membrecias" id="membrecias" class="textarea form-control form-control-sm" cols="30" rows="10">{!!$informacion->membrecias!!}</textarea>
+                    
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary pull-right">Guardar</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -278,4 +291,20 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+    $(function () {
+        // bootstrap WYSIHTML5 - text editor
+        $('.textarea').wysihtml5({
+            toolbar: { fa: true,
+                "image" : false,
+                "link" : false,
+                "font-styles" : false,
+            },
+            useLineBreaks : true,
+        })
+    })
+    </script>
 @endsection

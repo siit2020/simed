@@ -256,9 +256,8 @@ class DoctorController extends Controller
         $especialidades = Speciality::orderBy('specialty_name','ASC')->get();
 
         $informacion = Infodoctor::where('doctor_id', $doctor->id)->first();
-        return $informacion;
 
-        return view('panel.Doctores.profile', compact('doctor','user','clinica','especialidades','speciality'));
+        return view('panel.Doctores.profile', compact('doctor','user','clinica','especialidades','speciality','informacion'));
     }
 
     public function changeperfil(Request $request, $id)
