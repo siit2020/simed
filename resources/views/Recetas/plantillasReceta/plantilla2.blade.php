@@ -24,7 +24,7 @@
     </table>
 @endsection
 @section('content-main')
-<img src="{{public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" class="marca" alt="">
+{{-- <img src="{{public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" class="marca" alt=""> --}}
     <table class="table-bordered">
         <tr>
             <td colspan="3" class="text-center"><h4>RECETA MÉDICA</h4></td>

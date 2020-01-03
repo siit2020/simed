@@ -8,6 +8,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Http\Requests\UpdateUserRequest;
 use App\Doctor;
 use Auth;
 
@@ -114,33 +115,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-       
-        /*$user = User::find($id);
-        $user->update([
-            'password' =>  bcrypt($request->password), 
-        ]);
-        return back();*/
-       /* $user = User::find($id);
-        $username = User::where('username', $request->username)->exists();
+        $user = User::find($id);
 
-        if($username == false)
+        if($request->password == null)
         {
-            $user->update($request->all());
-            return back()->with('info', 'usuario actualizado correctamente!');
+            $user->update([
+                'name' => $request->name,
+                'username' => $request->username,
+            ]);
         }else{
-            if($user->username == $request->username)
+            if(Hash::check($request->passwordconfirm, Auth::user()->password))
             {
-                $user->update($request->all());
-                return back()->with('info', 'usuario actualizado correctamente!');
+                $user->update([
+                    'name' => $request->name,
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password),
+                ]);
             }else{
-                return back()->with('info', '¡¡El nombre de usuario ya existe!!');
+                return back()->with('errores','Su contraseña actual no coincide');
             }
-        } */
+        }
 
-
-        //return redirect()->route('panel.index');
+        return back()->with('info', 'Su información se actualizó correctamente');
     }
 
     /**

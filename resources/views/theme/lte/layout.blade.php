@@ -93,7 +93,6 @@
             el: '#globalVue',
             data:{
                 doctor:'',
-                urlimg: '',
                 cantidadNotificaciones: 0,
                 notificaciones: [],
                 biopsia:'',
@@ -108,13 +107,6 @@
                     axios.get(urldoctor).then(response =>{
                         this.doctor = response.data;
                     });
-                },
-                getUrl(){
-                    var imageurl = "{{route('users.profileimg')}}";
-                    axios.get(imageurl).then(response => {
-                            $(".img-hidden").show();
-                            $(".profile-img").prop("src", response.data);
-                    })
                 },
                 getNotificaciones(){
                     var url = "{{route('citas.notifications')}}";
@@ -167,7 +159,6 @@
                 }
             },
             created: function(){
-                this.getUrl();
                 this.getNotificaciones();
                 this.getdoctorselect();
             },

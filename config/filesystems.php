@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -13,7 +12,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'pruebas'),
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +57,11 @@ return [
             'driver' => 'local',
             'root'   => public_path(), // previously storage_path();
             'url' => '/',
+        ],
+
+        'pruebas' => [
+            'driver' => 'local',
+            'root'   => public_path(),
         ],
 
         's3' => [

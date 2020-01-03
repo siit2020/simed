@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
        /*  $this->app->bind('path.public',function(){
-             return'/home/ezrwzdx2ax2z/public_html';
+             return'C:\Users\thorin\Videos\public_html';
         }); */
     }
 

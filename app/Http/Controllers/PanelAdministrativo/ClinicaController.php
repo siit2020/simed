@@ -119,15 +119,10 @@ class ClinicaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //return $request;
         $clinica=Clinica::find($id);
-       $clinica->update( $request->all());
-       if(isset($_POST['user']))
-       {
-        return back()->with('info', 'Los datos de la clinica se actualizaron correctamente!');
-       }else{
-        return redirect()->route('clinicas.index', $id)->with('info', 'Se actualizo correctamente!');
-       }
+        $clinica->update($request->all());
+
+        return back()->with('info','La información de la clínica se actualizó correctamente');
     }
     /**
      * Remove the specified resource from storage.

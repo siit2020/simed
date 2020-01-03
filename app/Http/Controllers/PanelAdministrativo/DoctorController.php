@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Speciality;
 use App\DoctorEspeciality;
 use Illuminate\Support\Facades\DB;
-use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateDoctorRequest;
 
 class DoctorController extends Controller
 {
@@ -212,34 +212,12 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDoctorRequest $request, $id)
     {
         $doctor = Doctor::find($id);
-        $carpeta = public_path().'/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor;
 
-        if($request->file('photo') || $request->file('makerwater'))
-        {
-            $logo = $request->file('logo');
-            $marca = $request->file('makerwater');
-            $name = 'logo.'.$logo->getClientOriginalExtension();
-            $water = 'logo2.'.$logo->getClientOriginalExtension();
-            $logo->move($carpeta, $name);
-            $marca->move($carpeta, $water);
-            $doctor->update([
-                'nombreDoctor' => $request->nombreDoctor,
-                'apellidosDoctor' => $request->apellidosDoctor,
-                'tituloDoctor' => $request->tituloDoctor,
-                'nacimiento' => $request->nacimiento,
-                'cel' => $request->cel,
-                'direccion' => $request->direccion,
-                'sexo' => $request->sexo,
-                'logo' => $name,
-            ]);
-            return '200';
-        }else{
-            $doctor->update($request->all());
-            return back()->with('info', 'Sus datos personales se actualizaron correctamente');
-        }
+        $doctor->update($request->all());
+        return back()->with('info','Su información se actualizó correctamente');
     }
 
     public function perfil($id)
@@ -325,60 +303,16 @@ class DoctorController extends Controller
         }
     }
 
-    public function edicioninfo($id, $info)
+    public function edicioninfo(Request $request, $id)
     {
-        $doctor = Doctor::find($id);
-        $infos = Infodoctor::where('doctor_id',$id)->exists();
-        switch ($info) {
-            case "estudios":
-                $informacion = "Estudios Superiores";
-                if($infos == true)
-                {
-                    $data = Infodoctor::where('doctor_id',$id)->first();
-                    $var = "estudios";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var','data'));
-                }else{
-                    $var = "estudios";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var'));
-                }
-                break;
-            case "membrecias":
-                $informacion = "Membrecías";
-                if($infos == true)
-                {
-                    $data = Infodoctor::where('doctor_id',$id)->first();
-                    $var = "membrecias";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var','data'));
-                }else{
-                    $var = "membrecias";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var'));
-                }
-                break;
-            case "exp":
-                $informacion = "Experiencia Laboral";
-                if($infos == true)
-                {
-                    $data = Infodoctor::where('doctor_id',$id)->first();
-                    $var = "experiencia";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var','data'));
-                }else{
-                    $var = "experiencia";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var'));
-                }
-                break;
-            case "servicios":
-                $informacion = "Servicios";
-                if($infos == true)
-                {
-                    $data = Infodoctor::where('doctor_id',$id)->first();
-                    $var = "servicios";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var','data'));
-                }else{
-                    $var = "servicios";
-                    return view('panel.Doctores.infoedit', compact('doctor', 'informacion','var'));
-                }
-                break;
+        if(Infodoctor::where('doctor_id',$id)->exists()){
+            $informacion = Infodoctor::where('doctor_id',$id)->first();
+            $informacion->update($request->all());
+        }else{
+            $informacion = Infodoctor::create($request->all());
         }
+
+        return back()->with('info','Su información se actualizó correctamente');
     }
 
     public function updateinfo(Request $request, $id)

@@ -67,6 +67,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('notificationscitas', 'CitasController@citasnotifications')->name('citas.notifications');
 
 
+    //Imagenes
+    Route::put('imagenes/avatar/{id}', 'Pacientes\ImagenController@avatar')->name('imagenes.avatar');
+
     //procedimientos
     Route::resource('procedimiento', 'ProcedimientoController');
     Route::get('procedimiento/tipo/{id}', 'ProcedimientoController@tipo')->name('procedimiento.tipo');
@@ -187,10 +190,9 @@ Route::get('listausers','PanelAdministrativo\UserController@table')->name('users
 Route::get('usersimg/profile','PanelAdministrativo\UserController@imagenes')->name('users.profileimg');
 route::get('newuser/{id}','paneladministrativo\usercontroller@newuser')->name('users.nuevo');
 Route::resource('doctores', 'PanelAdministrativo\DoctorController');
-Route::get('doctores/informacion/{id}/{info}', 'PanelAdministrativo\DoctorController@edicioninfo')->name('doctores.informacion');
+Route::put('doctores/informacion/{id}', 'PanelAdministrativo\DoctorController@edicioninfo')->name('doctores.informacion');
 Route::put('doctores/updateinfo/{id}', 'PanelAdministrativo\DoctorController@updateinfo')->name('doctores.updateinfo');
 Route::get('doctorperfil/{id}', 'PanelAdministrativo\DoctorController@perfil')->name('doctores.profile');
-Route::post('doctoresperfil/{id}', 'PanelAdministrativo\DoctorController@changeperfil')->name('doctores.perfil');
 Route::get('nuevodoctor/{id}', 'PanelAdministrativo\DoctorController@nuevo')->name('doctores.nuevo');
 Route::get('logosdoctor/{id}', 'PanelAdministrativo\DoctorController@logos')->name('doctores.logos');
 Route::put('doctores/password/{id}', 'PanelAdministrativo\DoctorController@changepassword')->name('doctores.changepass');

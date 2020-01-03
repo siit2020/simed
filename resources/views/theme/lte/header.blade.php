@@ -73,14 +73,14 @@
               </li>
                 <li class="nav-item dropdown" id="logout">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <img src="" class="img-circle profile-img img-hidden" style="width:30px;max-height:30px;display:none" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
+                        <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:40px;height:35px;" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
                       </a>
                       <a id="navbarDropdown" class="nav-link dropdown-toggle d-block d-md-none" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                          <img src="" class="img-circle profile-img img-hidden" style="width:30px;max-height:30px;display:none" alt="user profile">
+                          <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:40px;height:35px;" alt="user profile">
                       </a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="dLabel" style="padding:10px;width:300px">
                         <div class="row">
-                          <div class="col-2"><img src="" class="img-circle img-thumbnail profile-img img-hidden" style="max-width:60px;height:60px;margin-left:5px;" alt=""></div>
+                          <div class="col-2"><img src="{{asset(Auth::user()->avatar)}}" class="img-circle img-thumbnail profile-img img-hidden" style="width:60px;height:60px;margin-left:5px;" alt=""></div>
                           <div class="col-10" >
                               <h5 style="line-height:80%;margin-top:12px;margin-bottom:5px;margin-left:30px">{{ Auth::user()->name }}</h5>
                               <h6 style="margin-top:0px;font-weight:200;font-size:12px;margin-left:30px">{{ Auth::user()->email }}</h6>

@@ -51,15 +51,17 @@
                                                     <td>{{$consulta->nombre.' '.$consulta->apellidos}}</td>
                                                     <td>$ {{$consulta->precioConsulta}}</td>
                                                     <td>
-                                                        {!! Form::open(['route' => 'cobro.trabajo', 'method' => 'PUT']) !!}
-                                                            {!! Form::hidden('historia', $consulta->historia ) !!}
-                                                            {!! Form::hidden('tipo', 'consulta' ) !!}
+                                                        <form action="{{route('cobro.trabajo')}}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="PUT">
+                                                            <input type="hidden" name="historia" value="{{$consulta->historia}}">
+                                                            <input type="hidden" name="tipo" value="consulta">
                                                             @if($consulta->status=='no-cancelado')
                                                             <button type="submit" class="btn btn-sm btn-danger "  >Cobrar</button>
                                                             @else
                                                             <button type="button" class="btn btn-sm btn-secondary"  disabled>Cobrado</button>
                                                             @endif
-                                                        {!! Form::close()!!}
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -101,15 +103,17 @@
                                                 <td>{{$procedimiento->nombre.' '.$procedimiento->apellidos}}</td>
                                                 <td>${{number_format($procedimiento->precioProcedimiento+$procedimiento->precioBiopsia, 2)}}</td>
                                                 <td>
-                                                    {!! Form::open(['route' => 'cobro.trabajo', 'method' => 'PUT']) !!}
-                                                        {!! Form::hidden('historia', $procedimiento->historia ) !!}
-                                                        {!! Form::hidden('tipo', 'procedimiento' ) !!}
+                                                    <form action="{{route('cobro.trabajo')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <input type="hidden" name="historia" value="{{$procedimiento->historia}}">
+                                                        <input type="hidden" name="tipo" value="procedimiento">
                                                         @if($procedimiento->status=='no-cancelado')
                                                         <button type="submit" class="btn btn-sm btn-danger">Cobrar</button>
                                                         @else 
                                                         <button type="button" class="btn btn-sm btn-secondary" disabled>Cobrado</button>
                                                         @endif
-                                                    {!! Form::close()!!}
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
