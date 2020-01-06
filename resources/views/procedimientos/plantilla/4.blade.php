@@ -77,7 +77,7 @@
     
         <table class="header">
                 <tr>
-                    <td> <img src="{{asset('assets/img/logosiimed.jpg')}}" width="100" alt=""> </td>
+                    <td> <img src="{{public_path($doctor->logo)}}" width="100" alt=""> </td>
                 </tr>
                 <tr>
                     <td width="496">

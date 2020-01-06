@@ -6,7 +6,7 @@
     <table>
         <tr>
             <td width="45%">
-                <img src="{{public_path('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" width="100%" height="150px" alt="">
+                <img src="{{public_path($doctor->logo)}}" width="100%" height="150px" alt="">
                 <h6 class="text-capitalize" style="margin:0%">Dr. {{$doctor->nombreDoctor.' '.$doctor->apellidosDoctor}}</h6>
                  @if($doctor->codigoDoctor != null)<p class="pequenio" style="margin:0%"><b>JVPM:</b> {{$doctor->codigoDoctor}}</p>@endif
             </td>

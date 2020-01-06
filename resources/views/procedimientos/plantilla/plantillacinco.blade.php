@@ -15,7 +15,7 @@
     <table class=" mt-4 ">
         <tr>
             <td width="45%">
-                <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo) }}" width="100%" height="auto" alt="{{$clinica->nombreClinica}}">
+                <img src="{{ public_path($doctor->logo) }}" width="100%" height="auto" alt="{{$clinica->nombreClinica}}">
             </td>
             <td class="align-top p-2">
                 <p class="pequenio text-right text-capitalize">{{ \Carbon\Carbon::parse($historial->created_at)->locale('es_Es')->isoFormat('dddd, LL') }}</p>
@@ -59,7 +59,7 @@
     </div>
     <p class="pequenio text-right mr-4">Sistemas de Integración médica <b class="text-primary">SIMED</b></p>
 @endsection
-<img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png') }}" class="marcadeagua" alt="{{$clinica->nombreClinica}}">
+<img src="{{ public_path($doctor->marca) }}" class="marcadeagua" alt="{{$clinica->nombreClinica}}">
 @section('content-footer')
 <table>
     <tr>
@@ -92,7 +92,7 @@
         <td > <p class="pequenio text-right text-capitalize">{{ \Carbon\Carbon::parse($historial->created_at)->locale('es_Es')->isoFormat('dddd, LL') }}</p></td>
     </tr>
     <tr>
-        <td><img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="400px" height="auto" alt="Logo"></td>
+        <td><img src="{{ public_path($doctor->logo)}}" width="400px" height="auto" alt="Logo"></td>
     </tr>
 </table>
 <table class="table-bordered text-center">

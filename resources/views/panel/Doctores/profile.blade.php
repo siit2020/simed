@@ -36,15 +36,15 @@
                             Foto de pérfil
                         </div>
                         <div class="card-body p-0" >
-                            <img src="{{asset($user->avatar)}}" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}">
-                            <form action="{{route('imagenes.avatar', $user->id)}}" method="POST" enctype="multipart/form-data">
+                            <a href="{{asset($user->avatar)}}" target="_blank"><img src="{{asset($user->avatar)}}" id="img-avatar" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}"></a>
+                            <form id="form-avatar" action="{{route('imagenes.avatar', $user->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="custom-file">
                                     <input type="file" name="avatar" class="custom-file-input" id="input-avatar" onchange="avatarchange()">
-                                    <label class="custom-file-label" for="customFile">Seleccionar</label>
+                                    <label class="custom-file-label" id="label-avatar" for="customFile">Seleccionar</label>
                                 </div>
-                                <button type="submit" style="display:none" class="btn btn-sm btn-primary btn-block" id="submit-avatar">Aceptar</button>
+                                <button type="submit" style="display:none" class="btn btn-sm btn-danger btn-block"  id="submit-avatar">Cambiar foto</button>
                             </form>
                         </div>
                     </div>
@@ -57,15 +57,15 @@
                             Logo
                         </div>
                         <div class="card-body p-0" >
-                            <img src="{{asset('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}">
-                            <form action="{{route('users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                            <a href="{{asset($doctor->logo)}}" target="_blank"><img src="{{asset($doctor->logo)}}" id="img-logo" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}"></a>
+                            <form id="form-logo" action="{{route('imagenes.logo', $user->doctor_id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="custom-file">
-                                    <input type="file" name="input-logo" class="custom-file-input" id="input-logo">
-                                    <label class="custom-file-label" for="customFile">Seleccionar</label>
+                                    <input type="file" name="input-logo" class="custom-file-input" id="input-logo" onchange="changelogo()">
+                                    <label class="custom-file-label" id="label-logo" for="customFile">Seleccionar</label>
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-primary btn-block">Aceptar</button>
+                                <button type="submit" class="btn btn-sm btn-danger btn-block" style="display:none" id="submit-logo">Cambiar logo</button>
                             </form>
                         </div>
                     </div>
@@ -78,15 +78,15 @@
                             Marca de agua
                         </div>
                         <div class="card-body p-0" >
-                            <img src="{{asset('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}">
-                            <form action="{{route('users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                            <a href="{{asset($doctor->marca)}}" target="_blank"><img src="{{asset($doctor->marca)}}" id="img-marca" class="img-fluid" width="100%" height="auto" alt="{{$user->name}}"></a>
+                            <form id="form-marca" action="{{route('imagenes.marca', $doctor->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="custom-file">
-                                    <input type="file" name="input-marca" class="custom-file-input" id="input-marca">
-                                    <label class="custom-file-label" for="customFile">Seleccionar</label>
+                                    <input type="file" name="input-marca" class="custom-file-input" id="input-marca" onchange="changemarca()">
+                                    <label class="custom-file-label" id="label-marca" for="customFile">Seleccionar</label>
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-primary btn-block btn-submit">Aceptar</button>
+                                <button type="submit" class="btn btn-sm btn-danger btn-block" style="display:none" id="submit-marca">Cambiar foto</button>
                             </form>
                         </div>
                     </div>
@@ -156,6 +156,7 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control form-control-sm" name="passwordconfirm" id="passwordConfirm" aria-describedby="inputGroupNPasswordConfirm">
                                 </div>
+                                <p style="font-size:10px;"><strong>si desea cambiar contraseña debe escribir su contraseña actual para confirmar</strong></p>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -269,13 +270,13 @@
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <label for="estudios">Estudios</label>
-                        <textarea name="estudios" id="estudios" class="textarea form-control form-control-sm" cols="30" rows="10">@isset($informacion){!!$informacion->estudios!!}@endisset</textarea>
+                        <textarea name="estudios" id="estudios" class="textarea form-control form-control-sm"  rows="10">@isset($informacion){!!$informacion->estudios!!}@endisset</textarea>
                         <label for="experiencia">Experiencia</label>
-                        <textarea name="experiencia" id="experiencia" class="textarea form-control form-control-sm" cols="30" rows="10">@isset($informacion){!!$informacion->experiencia!!}@endisset</textarea>
+                        <textarea name="experiencias" id="experiencia" class="textarea form-control form-control-sm"  rows="10">@isset($informacion){!!$informacion->experiencias!!}@endisset</textarea>
                         <label for="servicios">Servicios</label>
-                        <textarea name="servicios" id="servicios" class="textarea form-control form-control-sm" cols="30" rows="10">@isset($informacion){!!$informacion->servicios!!}@endisset</textarea>
+                        <textarea name="servicios" id="servicios" class="textarea form-control form-control-sm"  rows="10">@isset($informacion){!!$informacion->servicios!!}@endisset</textarea>
                         <label for="membrecias">Membrecías</label>
-                        <textarea name="membrecias" id="membrecias" class="textarea form-control form-control-sm" cols="30" rows="10">@isset($informacion){!!$informacion->membrecias!!}@endisset</textarea>
+                        <textarea name="membrecias" id="membrecias" class="textarea form-control form-control-sm"  rows="10">@isset($informacion){!!$informacion->membrecias!!}@endisset</textarea>
                     
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -356,12 +357,32 @@
                     </form>
                 </div>
             </div>
+
+            @if(count($asistentes)>0)
+            <div class="card shadow shadow-lg border border-primary">
+                <div class="card-header bg-primary">
+                    Asistentes
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach ($asistentes as $asistente)
+                            <li class="list-group-item">
+                                {{$asistente->name}} <a href="{{route('users.edit', $asistente->id)}}" class="pull-right btn btn-warning btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 @endsection
 
 @section('scripts')
     <script>
+
+    const carga = "{{asset('img/loading.gif')}}";
+
     $(function () {
         // bootstrap WYSIHTML5 - text editor
         $('.textarea').wysihtml5({
@@ -375,7 +396,36 @@
     });
 
     function avatarchange(){
+        const avatar = document.getElementById("input-avatar").files[0].name;
+        $("#label-avatar").html(avatar);
         $("#submit-avatar").show();
     }
+
+    function changelogo(){
+        const logo = document.getElementById("input-logo").files[0].name;
+        $("#label-logo").html(logo);
+        $("#submit-logo").show();
+    }
+
+    function changemarca(){
+        const marca = document.getElementById("input-marca").files[0].name;
+        $("#label-marca").html(marca);
+        $("#submit-marca").show();
+    }
+
+    $("#form-avatar").submit(function(){
+        var imagenavatar = $("#img-avatar");
+        imagenavatar.attr('src', carga);
+    });
+
+    $("#form-logo").submit(function(){
+        var imagenlogo = $("#img-logo");
+        imagenlogo.attr('src', carga);
+    });
+
+    $("#form-marca").submit(function(){
+        var imagenmarca = $("#img-marca");
+        imagenmarca.attr('src', carga);
+    });
     </script>
 @endsection

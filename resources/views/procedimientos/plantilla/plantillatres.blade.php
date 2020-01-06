@@ -5,7 +5,7 @@
 @section('content-header')
     <table class=" text-center mt-2">
         <tr>
-            <td><img src="{{public_path('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" width="400px" height="auto" alt="Logo"></td>
+            <td><img src="{{public_path($doctor->logo)}}" width="400px" height="auto" alt="Logo"></td>
         </tr>
     </table>
     <table class="table-bordered text-center">
@@ -52,7 +52,7 @@
 @section('content-imagenes')
 <table class=" text-center mt-2">
     <tr>
-        <td><img src="{{public_path('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png')}}" width="400px" height="auto" alt="Logo"></td>
+        <td><img src="{{public_path($doctor->logo)}}" width="400px" height="auto" alt="Logo"></td>
     </tr>
 </table>
 <table class="table-bordered text-center">

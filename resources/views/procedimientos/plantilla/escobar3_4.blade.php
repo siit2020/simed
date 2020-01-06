@@ -81,7 +81,7 @@
     
         <table class="header">
                 <tr>
-                    <td> <img src="{{public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="300" height="200" alt=""> </td>
+                    <td> <img src="{{public_path($doctor->logo)}}" width="300" height="200" alt=""> </td>
                 </tr>
                 <tr>
                     <td width="496">

@@ -165,7 +165,7 @@
 </head>
 <body>
     <div class="header-left">
-        <img src="{{ asset('procedimientos/plantilla/pacheco/sonodigest.png') }}" width="250" >
+        <img src="{{ public_path($doctor->logo) }}" width="250" >
         <p class="bold">CLÍNICA DE CIRUGÍAS Y ENFERMEDADES DIGESTIVAS</p>
         <p style="text-transform:uppercase">{{ $doctor->tituloDoctor }} | JVPM 7370</p>
     </div>

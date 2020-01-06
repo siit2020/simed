@@ -235,7 +235,12 @@ class DoctorController extends Controller
 
         $informacion = Infodoctor::where('doctor_id', $doctor->id)->first();
 
-        return view('panel.Doctores.profile', compact('doctor','user','clinica','especialidades','speciality','informacion'));
+        $asistentes = Doctor_asistente::select('users.*')->join('users','doctor_asistentes.user_id','users.id')
+            ->where('doctor_asistentes.doctor_id',$doctor->id)
+            ->orderBy('name','ASC')
+            ->get();
+
+        return view('panel.Doctores.profile', compact('doctor','user','clinica','especialidades','speciality','informacion','asistentes'));
     }
 
     public function changeperfil(Request $request, $id)
@@ -309,7 +314,13 @@ class DoctorController extends Controller
             $informacion = Infodoctor::where('doctor_id',$id)->first();
             $informacion->update($request->all());
         }else{
-            $informacion = Infodoctor::create($request->all());
+            $informacion = Infodoctor::create([
+                'doctor_id' => $id,
+                'estudios' => $request->estudios,
+                'experiencias' => $request->experiencias,
+                'membrecias' => $request->membrecias,
+                'servicios' => $request->servicios,
+            ]);
         }
 
         return back()->with('info','Su información se actualizó correctamente');

@@ -199,7 +199,7 @@
 </head>
 <body>
     <div class="header-left">
-        <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="200" >
+        <img src="{{ public_path($doctor->logo)}}" width="200" >
         <p class="bold">Clinica de guatemala</p>
         <p style="text-transform:uppercase">{{ $doctor->tituloDoctor }} | JVPM 0657</p>
     </div>

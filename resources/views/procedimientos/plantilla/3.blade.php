@@ -81,7 +81,7 @@
     
         <table class="header">
                 <tr>
-                    <td> <img src="{{asset('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="100" alt=""> </td>
+                    <td> <img src="{{public_path($doctor->logo)}}" width="100" alt=""> </td>
                 </tr>
                 <tr>
                     <td width="496">
@@ -133,7 +133,7 @@
     <div class="page-break"></div>
     
     <table class="logoss">
-        <tr><td> <img src="{{asset('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="100" alt="" ></td></tr>
+        <tr><td> <img src="{{public_path($doctor->logo)}}" width="100" alt="" ></td></tr>
     </table>
     <br>
 

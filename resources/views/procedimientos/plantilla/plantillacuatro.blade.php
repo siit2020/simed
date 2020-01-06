@@ -175,7 +175,7 @@
 <body>
         <header>
                 <div class="logo">
-                        <a href="{{route('home')}}"><img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png') }}" class="img-logo"></a>
+                        <a href="{{route('home')}}"><img src="{{ public_path($doctor->logo) }}" class="img-logo"></a>
                 </div>
                 <div class="info-header">
                     <span class="fecha" style="text-transform:capitalize;margin-top:5px"> {{ \Carbon\Carbon::parse($historial->created_at)->locale('es_Es')->isoFormat('dddd, LL') }}</span>

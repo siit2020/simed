@@ -7,7 +7,7 @@
         <tr>
             <td width="30%">
                 {{-- <img src="{{public_path('procedimientos/plantilla/zablah/logov.png')}}" width="100%" height="175px" alt=""> --}}
-                <img src="{{public_path('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="100%" height="150px" alt="">
+                <img src="{{public_path($doctor->logo)}}" width="100%" height="150px" alt="">
             </td>
             <td class="align-top text-center">
                 <h4 class="text-danger font-weight-bold" style="font-family:fantasy;margin:0%"><u>Dr. {{$doctor->nombreDoctor.' '.$doctor->apellidosDoctor}}</u></h4>

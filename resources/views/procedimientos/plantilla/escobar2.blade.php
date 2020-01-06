@@ -204,7 +204,7 @@
 </head>
 <body>
     <div class="header-left">
-        <img class="imgg" src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png') }}" width="400" height="130">    
+        <img class="imgg" src="{{ public_path($doctor->logo) }}" width="400" height="130">    
     </div>
 
     

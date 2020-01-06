@@ -95,17 +95,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::get();
-        $role_user=User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->where('users.id', $id)->
-        select('role_user.role_id')->get();
 
-        $permisos = Permission::get();
-        $permisos_user=$user->leftJoin('permission_user', 'users.id', 'permission_user.user_id')->get();
-        //$permisos_user = $user->permissions()->get();
-
-        $doctor = Doctor::where('user_id',$user->id)->exists();
-
-        return view('panel.Usuarios.edit', compact('user', 'roles', 'role_user', 'permisos', 'permisos_user','doctor'));
+        return view('panel.Usuarios.edit', compact('user'));
     }
 
     /**
@@ -118,6 +109,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
+        
 
         if($request->password == null)
         {
@@ -138,7 +130,15 @@ class UserController extends Controller
             }
         }
 
-        return back()->with('info', 'Su información se actualizó correctamente');
+        if($user->role_id == 4)
+        {
+            return back()->with('info', 'Su información se actualizó correctamente');
+        }else if($user->role_id == 3)
+        {
+            return redirect()->route('doctores.profile', Auth::user()->doctor_id)->with('info', 'Su información de su asistente '.$user->name.' se actualizó correctamente');
+        }else{
+            return back()->with('info', 'Su información se actualizó correctamente');
+        }
     }
 
     /**

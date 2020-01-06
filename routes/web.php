@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function(){
 
     //Imagenes
     Route::put('imagenes/avatar/{id}', 'Pacientes\ImagenController@avatar')->name('imagenes.avatar');
+    Route::put('imagenes/logo/{id}', 'Pacientes\ImagenController@changelogo')->name('imagenes.logo');
+    Route::put('imagenes/marca/{id}', 'Pacientes\ImagenController@changemarca')->name('imagenes.marca');
 
     //procedimientos
     Route::resource('procedimiento', 'ProcedimientoController');

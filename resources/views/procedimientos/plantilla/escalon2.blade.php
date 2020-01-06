@@ -188,7 +188,7 @@
 </head>
 <body>
     <div class="header-left">
-        <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/logo2.png') }}" width="300" height="75">
+        <img src="{{ public_path($doctor->logo) }}" width="300" height="75">
         <p class="bold" style="text-transform:uppercase">{{$clinica->nombreClinica}}</p>
         <p class="bold" style="text-transform:uppercase">{{ $procedimiento->doctorinvitado }} {{-- | JVPM {{$doctor->codigoDoctor}} --}}</p>
     </div>

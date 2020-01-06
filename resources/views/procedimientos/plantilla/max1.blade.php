@@ -91,7 +91,7 @@
 <body>
     <table class="header">
         <tr>
-            <td width="100"> <img src="{{asset('assets/img/logosiimed.jpg')}}" width="175" alt=""> </td>
+            <td width="100"> <img src="{{public_path($doctor->logo)}}" width="175" alt=""> </td>
             <td width="336">
                 <h1>Informe de {{ $tipo->procedimiento_nombre }} </h1>
                 <h2> {{$doctor->nombreDoctor.' '.$doctor->apellidosDoctor}} </h2>

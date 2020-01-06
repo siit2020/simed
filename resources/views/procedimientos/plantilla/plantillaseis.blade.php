@@ -14,7 +14,7 @@
 <table class=" text-right">
     <tr>
         <td width="45%">
-            <img src="{{public_path('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="100%" height="150px" alt="">
+            <img src="{{public_path($doctor->logo)}}" width="100%" height="150px" alt="">
         </td>
         <td class="align-top p-1" >
             <p class="pequenio text-capitalize" >{{ \Carbon\Carbon::parse($historial->created_at)->locale('es_Es')->isoFormat('dddd, LL') }}</p>

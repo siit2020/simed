@@ -107,7 +107,7 @@
 <body>
     <table class="header">
         <tr>
-            <td width="100"> <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="175" height="125" alt=""> </td>
+            <td width="100"> <img src="{{ public_path($doctor->logo)}}" width="175" height="125" alt=""> </td>
             <td width="336">
                 <h1> {{$doctor->tituloDoctor}} </h1>
                 <h2> Gastroenterólogo</h2>

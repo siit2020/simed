@@ -165,7 +165,7 @@
 </head>
 <body>
     <div class="header-left">
-        <img src="{{  public_path('procedimientos/plantilla/dracastro/logo.png') }}" width="250" >
+        <img src="{{  public_path($doctor->logo) }}" width="250" >
         <p class="bold">Gastroenterología - Endoscopias Digestivas</p>
         <p style="text-transform:uppercase">{{ $doctor->tituloDoctor }} | JVPM 4818</p>
     </div>

@@ -4,7 +4,7 @@
 @endsection
 @section('content-header')
     <div class="logo">
-        <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" class="img-logo" alt="">
+        <img src="{{ public_path($doctor->logo)}}" class="img-logo" alt="">
     </div>
     <div class="encabezado p-2">
         <hr class="bg-primary">
@@ -113,7 +113,7 @@
 @endsection
 @section('content-imagenes')
     <div class="logo">
-        <img src="{{ public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" class="img-logo" alt="">
+        <img src="{{ public_path($doctor->logo)}}" class="img-logo" alt="">
     </div>
     <div class="encabezado p-2">
         <hr class="bg-primary">

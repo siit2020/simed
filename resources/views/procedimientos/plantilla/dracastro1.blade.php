@@ -107,7 +107,7 @@
 <body>
     <table class="header">
         <tr>
-            <td width="100"> <img src="{{ public_path('procedimientos/plantilla/dracastro/logo.png')}}" width="200" height="110" alt=""> </td>
+            <td width="100"> <img src="{{ public_path($doctor->logo)}}" width="200" height="110" alt=""> </td>
             <td width="336">
                 <h1> {{ $doctor->tituloDoctor }} </h1>
                 <h2> Gastroenterología - Endoscopias Digestivas</h2>

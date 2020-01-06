@@ -11,7 +11,7 @@
     <div style="background-size:cover; background-image: url({{ asset('/assets/img/enfermera.jpg') }}); background-position: center center;position:absolute; top:0; left:0; width:100%; height:400px;"></div>
     <div style="height:250px; display:block; width:100%"></div>
     <div style="position:relative; z-index:9; text-align:center;">
-        <img src="@if($doctor->perfil == null){{asset($user->avatar)}}@else{{asset('adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->perfil)}}@endif"
+        <img src="@if(Auth::user()->avatar == null) {{asset('users/default.png')}}@else {{asset(Auth::user()->avatar)}}@endif"
              class="avatar"
              style="border-radius:50%; width:150px; height:150px; border:5px solid #fff;"
              alt="{{ Auth::user()->name }} avatar">

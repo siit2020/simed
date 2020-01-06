@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Storage;
 use Image;
 use Auth;
 use App\User;
+use App\Doctor;
+use \Carbon\Carbon as Fecha;
 
 class ImagenController extends Controller
 {
-    
     
     public function changeProfile(Request $request)
     {
@@ -33,52 +34,65 @@ class ImagenController extends Controller
     }
 
     public function avatar(Request $request, $id){
-        $path = $request->file('avatar')->store('users');
+        $carpeta = str_replace(' ','','users/'.Auth::user()->name.Auth::user()->id);
+
+        
+        $path = $request->file('avatar')->store($carpeta);
 
         $fileName = collect(explode('/', $path))->last();
 
-        $image = Image::make(Storage::get($path));
-
-        $image->resize(1280, null, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-          });
-
-        Storage::put($path, (string) $image->encode('jpg', 50));
+        $this->resize($path);
 
         $user = User::find($id);
         $user->update([
-            'avatar' => 'users/'.$fileName,
+            'avatar' => $carpeta.'/'.$fileName,
         ]);
 
-        return back();
+        return back()->with('info','Su foto de pérfil se actualizó correctamente');
+    }
+
+    public function changelogo(Request $request, $id){
+        $doctor = Doctor::find($id);
+        $carpeta = 'adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor;
+        $path = $request->file('input-logo')->store($carpeta);
+
+        $name = collect(explode('/',$path))->last();
+
+        $this->resize($path);
+
+        $doctor->update([
+            'logo' => $carpeta.'/'.$name,
+        ]);
+
+        return back()->with('info', 'Su logo se actualizó correctamente');
+    }
+
+    public function changemarca(Request $request, $id){
+        $doctor = Doctor::find($id);
+        $carpeta = 'adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor;
+        $path = $request->file('input-marca')->store($carpeta);
+
+        $name = collect(explode('/', $path))->last();
+
+        $this->resize($path);
+
+        $doctor->update([
+            'marca' => $carpeta.'/'.$name,
+        ]);
+
+        return back()->with('info', 'Su marca de agua se actualizó correctamente');
+    }
+
+    public function resize($ruta){
         
-        /* $file = $request->file('avatar');
-        $name = 'avatar'.$file->getClientOriginalName();
-        Storage::disk('pruebas')->put($name, \File::get($file)); */
+        $image = Image::make(Storage::get($ruta));
 
-
-
-
-
-       /*  $variale = Storage::disk('pruebas')->getDriver()->getAdapter()->getPathPrefix() ;
-        return $variale;
-        $file = $request->file('avatar');
-        $name = $file->getClientOriginalName();
-        Storage::disk('pruebas')->put($name, \File::get($file)); */
-
-        
-
-        /* $path = $request->file('avatar')->save('public/img');
-        
-        $filename = collect(explode('/',$path))->last();
-        $image = Image::make(Storage::get($path));
-        $image->resize(1280, null, function ($constraint) {
+        $image->resize(1280, null, function($constraint){
             $constraint->aspectRatio();
             $constraint->upsize();
-          });
+        });
 
-        Storage::put($path, (string) $image->encode('jpg', 30)); */
+        Storage::put($ruta, (string) $image->encode('jpg', 30));
     }
     
 
