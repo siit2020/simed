@@ -1,43 +1,45 @@
 @extends('theme.lte.layout')
+
 @section('contenido')
-   {{--  <div class="col-md-4 pull-right">
-      <div class="input-group input-daterange">
-  
-        <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
-  
-        <div class="input-group-addon">to</div>
-  
-        <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
-  
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card shadow shadow-lg border border-primary">
+          <div class="card-header bg-primary">
+            Procedimientos/Consultas
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-hover" id="procedimientos">
+                <thead class="bg-info">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div> --}}
-  <table id="procedimientos"></table>
-  
 @endsection
+
 @section('scripts')
     <script>
-/*       
-$.fn.dataTable.ext.search.push(
-  function(settings, data, dataIndex) {
-    var min = $('#min-date').val();
-    var max = $('#max-date').val();
-    var createdAt = data[2] || 0; 
-
-    if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-    ) {
-      return true;
-    }
-    return false;
-  }
-);
-
-var table = $('#my-table').DataTable();
-$('.date-range-filter').change(function() {
-  table.draw();
-}); */
-
+      $(document).ready(function(){
+        $("#procedimientos").DataTable({
+          "processing" : true,
+          "serverSide" : true,
+          "ajax" : "{{route('procedimiento.listprocedimientos')}}",
+          "columns": [
+            { "data": "nombre"},
+            { "data": "apellidos"},
+            { "data": "created_at"},
+            { "data": "tipo"}
+          ]
+        })
+      })
     </script>
 @endsection

@@ -51,15 +51,43 @@
                     </li>
                 @endif --}}
             @else
-              <li class="nav-item dropdown"  id="notificaciones" style="display:none">
+                <li class="nav-item dropdown">
+                  <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="fa fa-birthday-cake"></i>
+                    <span class="badge badge-rosa navbar-badge ml-2" style="font-size:10px" >@{{cumpleaneros.length}}</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="margin:0%;padding:0%">
+                      <ul class="list-group" style="margin:0%;padding:0%">
+                        <span class="dropdown-item dropdown-header" >
+                          @{{cumpleaneros.length}} Cumpleañeros
+                        </span>
+                        <li class="list-group-item" style="margin:0%;padding:0%" v-for="cumples of cumpleaneros">
+                          <a href="" class="dropdown-item">
+                            <div class="media">
+                            <img v-bind:src="'http://127.0.0.1:8000/'+cumples.avatar" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                  @{{cumples.nombre}}
+                                </h3>
+                                <p class="text-sm text-primary">Deseale un feliz cumpleaños</p>
+                                <p class="text-sm text-muted"><i class="fa fa-calendar" aria-hidden="true"></i> @{{cumples.fecha}}</p>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                  </div>
+                </li>
+
+              <li v-if="notificaciones.length>0" class="nav-item dropdown"  id="notificaciones" >
                 <a class="nav-link" data-toggle="dropdown" href="#">
                   <i class="fa fa-bell" aria-hidden="true"></i>
-                  <span class="badge badge-warning navbar-badge">@{{cantidadNotificaciones}}</span>
+                  <span class="badge badge-warning navbar-badge ml-2" style="font-size:10px">@{{notificaciones.length}}</span>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right"  style="width:400px">
                   <ul class="list-group">
                     <span class="dropdown-item dropdown-header">
-                      @{{cantidadNotificaciones}} Notificaciones
+                      @{{notificaciones.length}} Notificaciones
                     </span>
                     <li class="list-group-item" v-for="item of notificaciones">
                       <div class="row">
@@ -69,7 +97,7 @@
                           <p class="text-secondary" style="font-size:11px;margin:0%;padding:0%">@{{item.hora}}</p>
                         </div>
                         <div class="col-md-2">
-                          <a href="{{route('citas.marcarvisto', 1)}}" class="btn btn-sm btn-success mt-2" onclick="event.preventDefault();document.getElementById('form-visto').submit();"><i class="fa fa-check" aria-hidden="true"></i> Visto</a>
+                          <a href="{{route('citas.marcarvisto', 1)}}" class="btn btn-sm btn-success mt-2" onclick="event.preventDefault();document.getElementById('form-visto').submit();"><i class="fa fa-check" aria-hidden="true"></i></a>
                           <form id="form-visto" action="{{route('citas.marcarvisto', 1)}}" method="POST" >
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
@@ -79,18 +107,6 @@
                       </div>
                     </li>
                   </ul>
-                  {{--  <ul class="list-group">
-                    <span class="dropdown-item dropdown-header">@{{cantidadNotificaciones}} Notificationes</span>
-                      <li class="list-group-item" v-for="item of notificaciones">
-                        <div class="row">
-                          <div class="col-9">
-                            <i class="fa fa-bookmark" aria-hidden="true"></i> @{{item.titulo}}<a href="#" class="text-sm"></a>
-                            <div v-if="item.paciente != 'null null'" class="text-sm">@{{item.paciente}}</div>
-                          </div>
-                          <div class="col-3"><span class="float-right text-muted text-sm">@{{item.hora}}</span></div>
-                        </div>
-                      </li>
-                   </ul> --}}
                 </div>
               </li>
                 <li class="nav-item dropdown" id="logout">

@@ -398,13 +398,10 @@ class ProcedimientoController extends Controller
 
     public function listProcedures(){
         return datatables()
-            ->eloquent(HistorialClinico::select('historial_clinicos.created_at','historial_clinicos.tipo','pacientes.nacimiento','pacientes.apellidos')
+            ->eloquent(HistorialClinico::select('historial_clinicos.created_at','historial_clinicos.tipo','pacientes.nombre','pacientes.apellidos')
             ->leftJoin('pacientes','pacientes.id','historial_clinicos.paciente_id')
             ->where('historial_clinicos.doctor_id',Auth::user()->doctor_id)
             ->orderBy('historial_clinicos.created_at','DESC'))
-            ->addColumn('pacientes.nacimiento', function($row){
-                return "{$row->age}";
-            })
             ->toJson();
     }
 

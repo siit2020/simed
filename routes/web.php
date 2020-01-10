@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function(){
             //ruta para obtener los pacientes en la datatable
     Route::get('listadoPacientes', 'PacientesController@listadoPacientes');
     Route::get('pacientes/historico/{id}', 'PacientesController@historico')->name('pacientes.historico');
+    Route::get('cumpleanios/mes','PacientesController@cumpleanieros')->name('pacientes.cumples');
 
 
     //citas

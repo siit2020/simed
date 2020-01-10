@@ -430,4 +430,12 @@ class PacientesController extends Controller
             return response()->json('ok');
         }
     }
+
+    public function cumpleanieros(){
+        $mes = Carbon::now()->month;
+        $cumples = Paciente::select('pacientes.nombre','pacientes.apellidos','pacientes.nacimiento','pacientes.id','pacientes.photo_extension')
+                ->whereMonth('nacimiento',$mes)->where('doctor_id',Auth::user()->doctor_id)
+                ->orderBy('nacimiento','DESC')->get();
+        return $cumples;
+    }
 }

@@ -25,8 +25,20 @@
     <link rel="stylesheet" href="{{asset("assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .badge-rosa{
+            background-color: palevioletred;
+        }/* 
+        .titulo-cumples{
+             background-image: url("{{asset('assets/img/confeti.jpg')}}");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+            } */
+    </style>
     @yield('styles')
-
+    
 </head>
     <body class="hold-transition skin-purple-light sidebar-mini sidebar-collapse" >
 
@@ -93,15 +105,25 @@
             el: '#globalVue',
             data:{
                 doctor:'',
-                cantidadNotificaciones: 0,
                 notificaciones: [],
                 biopsia:'',
                 mostrar: false,
                 mostrarDiag: false,
                 mostrarDetalle: true,
+                cumpleaneros: [],
                 
             },
             methods:{
+                getCumpleaneros(){
+                    var urlcumples = "{{route('pacientes.cumples')}}";
+                    axios.get(urlcumples).then(response =>{
+                        for(var i=0; i<response.data.length; i++){
+                            this.cumpleaneros.push({
+                                nombre: response.data[i].nombre+response.data[i].apellidos, fecha: moment(response.data[i].nacimiento).calendar(), avatar: response.data[i].photo_extension, id: response.data[i].id
+                            });
+                        }
+                    });
+                },
                 getdoctorselect(){
                     var urldoctor = "{{route('home.doctorselect')}}";
                     axios.get(urldoctor).then(response =>{
@@ -159,6 +181,7 @@
                 }
             },
             created: function(){
+                this.getCumpleaneros();
                 this.getNotificaciones();
                 this.getdoctorselect();
             },
