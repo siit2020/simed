@@ -38,7 +38,7 @@
 
             <!-- Main content -->
             <section class="content" >
-                <div class="container-fluid puto" >
+                <div class="container-fluid">
                     @yield('contenido')
                 </div><!-- /.container-fluid -->
             </section>
@@ -113,7 +113,7 @@
                     axios.get(url).then(response => {
                         for (var i=0; i< response.data.length; i++){
                             this.notificaciones.push({
-                                id: response.data[i].id , titulo: response.data[i].title, hora: moment(response.data[i].start).calendar(), paciente: response.data[i].nombre + ' ' + response.data[i].apellidos
+                                id: response.data[i].id , titulo: response.data[i].title, hora: moment(response.data[i].start).calendar(), paciente: response.data[i].nombre + ' ' + response.data[i].apellidos, estado: response.data[i].estado
                             })
                         }
                         this.cantidadNotificaciones = Object.keys(response.data).length;

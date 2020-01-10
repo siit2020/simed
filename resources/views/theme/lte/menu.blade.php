@@ -86,6 +86,13 @@
               <p>Inventario</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('procedimiento.index')}}" class="nav-link">
+              <i class="nav-icon fa fa-search" aria-hidden="true"></i>
+              <p>Busquedas</p>
+            </a>
+          </li>
           
           @if(Auth::user()->hasPermission('show_doctors')) 
           <li class="nav-item">

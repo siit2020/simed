@@ -93,6 +93,7 @@ class ImagenController extends Controller
         });
 
         Storage::put($ruta, (string) $image->encode('jpg', 30));
+        
     }
     
 

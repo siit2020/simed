@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function(){
     //eliminar citas con el doctor
     Route::post('calendardelete', 'CitasController@calendardelete')->name('calendardelete');
     Route::get('notificationscitas', 'CitasController@citasnotifications')->name('citas.notifications');
+    Route::put('citasupdate/{id}', 'CitasController@marcarvisto')->name('citas.marcarvisto');
 
 
     //Imagenes
@@ -79,6 +80,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('procedimiento/generar/{tipo}/{plantilla}/{id}', 'ProcedimientoController@generar')->name('procedimiento.generar');
     Route::post('procedimiento/dropzone/{tipo}/{plantilla}/{id}', 'ProcedimientoController@dropzone')->name('procedimiento.dropzone');
     Route::post('procedimientoEdit/{id}', 'ProcedimientoController@dropzoneEdit')->name('procedimiento.dropzoneEdit');
+    Route::get('procedimientoslist', 'ProcedimientoController@listProcedures')->name('procedimiento.listprocedimientos');
+    
 
     //reportes
     Route::get('reportes/reporteConsulta/{id}', 'ReportesController@generarReporteConsulta')->name('reporteConsulta');

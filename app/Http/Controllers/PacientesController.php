@@ -424,4 +424,10 @@ class PacientesController extends Controller
             }
         }
     }
+
+    public function addmovil(Request $request){
+        if($request->dato == 1){
+            return response()->json('ok');
+        }
+    }
 }

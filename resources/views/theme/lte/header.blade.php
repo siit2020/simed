@@ -56,34 +56,50 @@
                   <i class="fa fa-bell" aria-hidden="true"></i>
                   <span class="badge badge-warning navbar-badge">@{{cantidadNotificaciones}}</span>
                 </a>
-                <div class="dropdown-menu  dropdown-menu-right"  style="width:500px">
-                   <ul class="list-group">
+                <div class="dropdown-menu  dropdown-menu-right"  style="width:400px">
+                  <ul class="list-group">
+                    <span class="dropdown-item dropdown-header">
+                      @{{cantidadNotificaciones}} Notificaciones
+                    </span>
+                    <li class="list-group-item" v-for="item of notificaciones">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <p class="text-sm" style="margin:0%;padding:0%">@{{item.titulo}}</p>
+                          <p v-if="item.paciente != 'null null'" class="text-sm" style="margin:0%;padding:0%">@{{item.paciente}}</p>
+                          <p class="text-secondary" style="font-size:11px;margin:0%;padding:0%">@{{item.hora}}</p>
+                        </div>
+                        <div class="col-md-2">
+                          <a href="{{route('citas.marcarvisto', 1)}}" class="btn btn-sm btn-success mt-2" onclick="event.preventDefault();document.getElementById('form-visto').submit();"><i class="fa fa-check" aria-hidden="true"></i> Visto</a>
+                          <form id="form-visto" action="{{route('citas.marcarvisto', 1)}}" method="POST" >
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden"  name="codigo" v-model="item.id">
+                          </form>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  {{--  <ul class="list-group">
                     <span class="dropdown-item dropdown-header">@{{cantidadNotificaciones}} Notificationes</span>
                       <li class="list-group-item" v-for="item of notificaciones">
                         <div class="row">
                           <div class="col-9">
-                            <i class="fa fa-bookmark" aria-hidden="true"></i> @{{item.titulo}} <a href="#" class="text-sm"  ></a>
+                            <i class="fa fa-bookmark" aria-hidden="true"></i> @{{item.titulo}}<a href="#" class="text-sm"></a>
                             <div v-if="item.paciente != 'null null'" class="text-sm">@{{item.paciente}}</div>
                           </div>
                           <div class="col-3"><span class="float-right text-muted text-sm">@{{item.hora}}</span></div>
                         </div>
                       </li>
-                   </ul>
+                   </ul> --}}
                 </div>
               </li>
                 <li class="nav-item dropdown" id="logout">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                    <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden"  style="width:40px;height:35px;" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
+                    <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden"  style="width:35px;height:30px;" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
                   </a>
                   <a id="navbarDropdown" class="nav-link dropdown-toggle d-block d-md-none" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                      <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:40px;height:35px;" alt="user profile">
+                      <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:35px;height:30px;" alt="user profile">
                   </a>
-                  {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                    <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:30px;max-height:30px;display:none" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
-                  </a>
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <img src="{{asset(Auth::user()->avatar)}}" class="img-circle profile-img img-hidden" style="width:40px;height:35px;" alt="user profile"> <span class="">{{ Auth::user()->name }}</span>   <span class="caret"></span>
-                      </a> --}}
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="dLabel" style="padding:10px;width:300px">
                         <div class="row">
                           <div class="col-2"><img src="{{asset(Auth::user()->avatar)}}" width="100%" height="auto" class="img-circle" style="width:60px;height:60px;margin-left:5px;" alt=""></div>

@@ -730,10 +730,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
 
-
+    /* formulario = $('#formularioReceta').submit();
+        window.location = "{{route('recetas.mensaje', $paciente->id)}}"; */
    function enviado(){
-       formulario = $('#formularioReceta').submit();
-        window.location = "{{route('recetas.mensaje', $paciente->id)}}";
+       if($("#receta").val().length >0){
+            formulario = $('#formularioReceta').submit();
+            window.location = "{{route('recetas.mensaje', $paciente->id)}}"
+       }else{
+           $("#invalid-textarea").show();
+       }
    }
 
    function cambiar(){

@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Storage;
 use App\DoctorProcedimientos;
 use App\PlantillaProcedimiento;
 use App\InfoProcedimiento;
+use Illuminate\Support\Facades\DB;
 
 class ProcedimientoController extends Controller
 {
@@ -32,8 +33,13 @@ class ProcedimientoController extends Controller
      */
     public function index()
     {
-        $pdf=PDF::loadView('procedimientos.plantilla.1')->setPaper('letter');
-        return $pdf->stream('reporte.pdf');
+        /* $query = DB::table('historial_clinicos')->whereNull('consulta_id')->whereNull('procedimiento_id')->update(['tipo' => 'anexo']);
+        return $query; */
+
+     
+        return view('procedimientos.index');
+        /* $pdf=PDF::loadView('procedimientos.plantilla.1')->setPaper('letter');
+        return $pdf->stream('reporte.pdf'); */
     }
 
     /**
@@ -388,6 +394,18 @@ class ProcedimientoController extends Controller
 
         return $id;        
 
+    }
+
+    public function listProcedures(){
+        return datatables()
+            ->eloquent(HistorialClinico::select('historial_clinicos.created_at','historial_clinicos.tipo','pacientes.nacimiento','pacientes.apellidos')
+            ->leftJoin('pacientes','pacientes.id','historial_clinicos.paciente_id')
+            ->where('historial_clinicos.doctor_id',Auth::user()->doctor_id)
+            ->orderBy('historial_clinicos.created_at','DESC'))
+            ->addColumn('pacientes.nacimiento', function($row){
+                return "{$row->age}";
+            })
+            ->toJson();
     }
 
     

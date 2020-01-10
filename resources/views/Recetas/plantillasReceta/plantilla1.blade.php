@@ -8,7 +8,7 @@
     <table>
         <tr>
             <td width="50%">
-                <img src="{{public_path('/adjuntosdoctor/'.$doctor->id.'-'.$doctor->apellidosDoctor.'/'.$doctor->logo)}}" width="100%" height="auto" alt="{{$clinica->nombreClinica}}">
+                <img src="{{public_path($doctor->logo)}}" width="100%" height="auto" alt="{{$clinica->nombreClinica}}">
             </td>
             <td style="border-left:#007bff solid 2px" class="align-top text-small">
                 <table style="margin:10px">

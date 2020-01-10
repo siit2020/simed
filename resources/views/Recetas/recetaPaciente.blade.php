@@ -54,6 +54,7 @@
             <div class="form-group">
               <textarea class="form-control textarea receta" id="receta" name="receta"  placeholder="Receta..." required></textarea>
             </div>
+            <p id="invalid-textarea" style="font-size:12px;color:red;display:none">Debe llenar el contenido de la receta</p>
         </div>
         <div class="modal-footer">
           <div class="form-group pull-right">

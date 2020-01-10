@@ -28,7 +28,6 @@ class CitasController extends Controller
          $citas=Cita::where('doctor_id', '=', Auth::user()->doctor_id)->get();
 
         return $citas;
-
     }   
 
     public function calendarinsert(Request $request)
@@ -212,15 +211,24 @@ class CitasController extends Controller
     }
     
      public function citasnotifications(){
-        //return Carbon::now()->format('Y-m-d, h:m');
         $now = Carbon::now();
         $morenow = Carbon::now()->addDay(3);
-        $notfications = Cita::select('citas.id','title','start','nombre','apellidos')
+        $notfications = Cita::select('citas.id','citas.title','citas.start','pacientes.nombre','pacientes.apellidos','citas.estado')
             ->leftJoin('pacientes','citas.paciente_id','pacientes.id')
             ->whereDate('start','>=',$now)
+            ->where('estado','false')
             ->where('citas.doctor_id',Auth::user()->doctor_id)
             ->whereDate('start','<=',$morenow)->orderBy('start','ASC')->get();
         return response()->json($notfications);
+    }
+
+    public function marcarvisto(Request $request, $id){
+        $cita = Cita::find($request->codigo);
+        $cita->update([
+            'estado' => 'true',
+        ]);
+
+        return back();
     }
 
 
